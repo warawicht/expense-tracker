@@ -31,7 +31,7 @@ npm install
 # Start development server
 npm run dev
 
-# Open browser to http://localhost:3000
+# Open browser to http://localhost:5173 (Vite default port)
 ```
 
 ## Initial Setup

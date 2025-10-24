@@ -49,9 +49,9 @@ description: "Task list for expense tracker application implementation"
 **Purpose**: Project initialization and basic structure
 
 - [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize TypeScript project with React 18+ dependencies
+- [ ] T002 Initialize Vite project with vanilla JavaScript configuration
 - [ ] T003 [P] Configure ESLint and Prettier for code formatting (Clean Code Foundation)
-- [ ] T004 [P] Setup automated testing framework with Jest and React Testing Library (Test-Driven Development)
+- [ ] T004 [P] Setup automated testing framework with Vitest (Test-Driven Development)
 - [ ] T005 [P] Configure CI/CD pipeline with GitHub Actions (Continuous Integration & Delivery)
 - [ ] T006 [P] Setup logging infrastructure with structured logging (Observability)
 
@@ -63,9 +63,9 @@ description: "Task list for expense tracker application implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T007 Setup IndexedDB with Dexie.js for data storage
+- [ ] T007 Setup SQLite database with sql.js for data storage
 - [ ] T008 [P] Implement core data models in src/models/ (Expense, Category, Filter)
-- [ ] T009 [P] Setup React Router for navigation
+- [ ] T009 [P] Setup client-side routing with vanilla JavaScript
 - [ ] T010 Create base UI components in src/components/common/
 - [ ] T011 Configure error handling and logging infrastructure (Observability)
 - [ ] T012 Setup environment configuration management
@@ -86,19 +86,19 @@ description: "Task list for expense tracker application implementation"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T015 [P] [US1] Unit test for expense validation in tests/unit/models/expense.test.ts
-- [ ] T016 [P] [US1] Integration test for expense creation in tests/integration/expense.test.ts
-- [ ] T017 [P] [US1] E2E test for expense entry flow in tests/e2e/expense-entry.test.ts
-- [ ] T018 [P] [US1] Accessibility test for expense form in tests/accessibility/expense-form.test.ts
+- [ ] T015 [P] [US1] Unit test for expense validation in tests/unit/models/expense.test.js
+- [ ] T016 [P] [US1] Integration test for expense creation in tests/integration/expense.test.js
+- [ ] T017 [P] [US1] E2E test for expense entry flow in tests/e2e/expense-entry.test.js
+- [ ] T018 [P] [US1] Accessibility test for expense form in tests/accessibility/expense-form.test.js
 
 ### Implementation for User Story 1
 
-- [ ] T019 [P] [US1] Create Expense model in src/models/Expense.ts (Clean Code Foundation)
-- [ ] T020 [P] [US1] Create PaymentMethod enum in src/models/PaymentMethod.ts (Clean Code Foundation)
-- [ ] T021 [US1] Implement ExpenseService in src/services/expenseService.ts
-- [ ] T022 [US1] Implement StorageService in src/services/storageService.ts
-- [ ] T023 [US1] Create ExpenseForm component in src/components/expense/ExpenseForm.tsx (User Experience First)
-- [ ] T024 [US1] Create ExpenseList component in src/components/expense/ExpenseList.tsx (User Experience First)
+- [ ] T019 [P] [US1] Create Expense model in src/models/Expense.js (Clean Code Foundation)
+- [ ] T020 [P] [US1] Create PaymentMethod enum in src/models/PaymentMethod.js (Clean Code Foundation)
+- [ ] T021 [US1] Implement ExpenseService in src/services/expenseService.js
+- [ ] T022 [US1] Implement StorageService in src/services/storageService.js
+- [ ] T023 [US1] Create ExpenseForm component in src/components/expense/ExpenseForm.js (User Experience First)
+- [ ] T024 [US1] Create ExpenseList component in src/components/expense/ExpenseList.js (User Experience First)
 - [ ] T025 [US1] Add validation and error handling (Clean Code Foundation)
 - [ ] T026 [US1] Add structured logging for expense operations (Observability)
 - [ ] T027 [US1] Add performance monitoring for expense operations (Observability)
@@ -115,17 +115,17 @@ description: "Task list for expense tracker application implementation"
 
 ### Tests for User Story 2 (REQUIRED - Test-Driven Development) ⚠️
 
-- [ ] T028 [P] [US2] Unit test for category validation in tests/unit/models/category.test.ts
-- [ ] T029 [P] [US2] Integration test for category management in tests/integration/category.test.ts
-- [ ] T030 [P] [US2] E2E test for category creation and assignment in tests/e2e/category-management.test.ts
+- [ ] T028 [P] [US2] Unit test for category validation in tests/unit/models/category.test.js
+- [ ] T029 [P] [US2] Integration test for category management in tests/integration/category.test.js
+- [ ] T030 [P] [US2] E2E test for category creation and assignment in tests/e2e/category-management.test.js
 
 ### Implementation for User Story 2
 
-- [ ] T031 [P] [US2] Create Category model in src/models/Category.ts (Clean Code Foundation)
-- [ ] T032 [US2] Implement CategoryService in src/services/categoryService.ts
-- [ ] T033 [US2] Create CategoryForm component in src/components/category/CategoryForm.tsx (User Experience First)
-- [ ] T034 [US2] Create CategoryList component in src/components/category/CategoryList.tsx (User Experience First)
-- [ ] T035 [US2] Create CategorySelector component in src/components/category/CategorySelector.tsx (User Experience First)
+- [ ] T031 [P] [US2] Create Category model in src/models/Category.js (Clean Code Foundation)
+- [ ] T032 [US2] Implement CategoryService in src/services/categoryService.js
+- [ ] T033 [US2] Create CategoryForm component in src/components/category/CategoryForm.js (User Experience First)
+- [ ] T034 [US2] Create CategoryList component in src/components/category/CategoryList.js (User Experience First)
+- [ ] T035 [US2] Create CategorySelector component in src/components/category/CategorySelector.js (User Experience First)
 - [ ] T036 [US2] Integrate category selection into ExpenseForm component
 - [ ] T037 [US2] Add category validation and error handling (Clean Code Foundation)
 
@@ -141,17 +141,17 @@ description: "Task list for expense tracker application implementation"
 
 ### Tests for User Story 3 (REQUIRED - Test-Driven Development) ⚠️
 
-- [ ] T038 [P] [US3] Unit test for filter logic in tests/unit/models/filter.test.ts
-- [ ] T039 [P] [US3] Integration test for expense filtering in tests/integration/filter.test.ts
-- [ ] T040 [P] [US3] E2E test for filter UI in tests/e2e/expense-filter.test.ts
+- [ ] T038 [P] [US3] Unit test for filter logic in tests/unit/models/filter.test.js
+- [ ] T039 [P] [US3] Integration test for expense filtering in tests/integration/filter.test.js
+- [ ] T040 [P] [US3] E2E test for filter UI in tests/e2e/expense-filter.test.js
 
 ### Implementation for User Story 3
 
-- [ ] T041 [P] [US3] Create Filter model in src/models/Filter.ts (Clean Code Foundation)
-- [ ] T042 [US3] Create FilterPanel component in src/components/filters/FilterPanel.tsx (User Experience First)
-- [ ] T043 [US3] Create DateRangePicker component in src/components/filters/DateRangePicker.tsx (User Experience First)
-- [ ] T044 [US3] Create CategoryFilter component in src/components/filters/CategoryFilter.tsx (User Experience First)
-- [ ] T045 [US3] Create AmountFilter component in src/components/filters/AmountFilter.tsx (User Experience First)
+- [ ] T041 [P] [US3] Create Filter model in src/models/Filter.js (Clean Code Foundation)
+- [ ] T042 [US3] Create FilterPanel component in src/components/filters/FilterPanel.js (User Experience First)
+- [ ] T043 [US3] Create DateRangePicker component in src/components/filters/DateRangePicker.js (User Experience First)
+- [ ] T044 [US3] Create CategoryFilter component in src/components/filters/CategoryFilter.js (User Experience First)
+- [ ] T045 [US3] Create AmountFilter component in src/components/filters/AmountFilter.js (User Experience First)
 - [ ] T046 [US3] Implement search functionality in ExpenseList component
 - [ ] T047 [US3] Add filter performance optimizations (Observability)
 
@@ -167,18 +167,18 @@ description: "Task list for expense tracker application implementation"
 
 ### Tests for User Story 4 (REQUIRED - Test-Driven Development) ⚠️
 
-- [ ] T048 [P] [US4] Unit test for chart data calculation in tests/unit/services/analytics.test.ts
-- [ ] T049 [P] [US4] Integration test for chart rendering in tests/integration/charts.test.ts
-- [ ] T050 [P] [US4] E2E test for chart interaction in tests/e2e/charts.test.ts
+- [ ] T048 [P] [US4] Unit test for chart data calculation in tests/unit/services/analytics.test.js
+- [ ] T049 [P] [US4] Integration test for chart rendering in tests/integration/charts.test.js
+- [ ] T050 [P] [US4] E2E test for chart interaction in tests/e2e/charts.test.js
 
 ### Implementation for User Story 4
 
-- [ ] T051 [P] [US4] Create AnalyticsService in src/services/analyticsService.ts
-- [ ] T052 [US4] Setup Chart.js configuration in src/utils/chartConfig.ts
-- [ ] T053 [US4] create PieChart component in src/components/charts/PieChart.tsx (User Experience First)
-- [ ] T054 [US4] create LineChart component in src/components/charts/LineChart.tsx (User Experience First)
-- [ ] T055 [US4] create BarChart component in src/components/charts/BarChart.tsx (User Experience First)
-- [ ] T056 [US4] Create AnalyticsDashboard component in src/components/analytics/AnalyticsDashboard.tsx (User Experience First)
+- [ ] T051 [P] [US4] Create AnalyticsService in src/services/analyticsService.js
+- [ ] T052 [US4] Setup Chart.js configuration in src/utils/chartConfig.js
+- [ ] T053 [US4] create PieChart component in src/components/charts/PieChart.js (User Experience First)
+- [ ] T054 [US4] create LineChart component in src/components/charts/LineChart.js (User Experience First)
+- [ ] T055 [US4] create BarChart component in src/components/charts/BarChart.js (User Experience First)
+- [ ] T056 [US4] Create AnalyticsDashboard component in src/components/analytics/AnalyticsDashboard.js (User Experience First)
 - [ ] T057 [US4] Add chart accessibility features (User Experience First)
 - [ ] T058 [US4] Add chart performance monitoring (Observability)
 

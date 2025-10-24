@@ -11,15 +11,16 @@ Build a responsive web application for expense tracking that allows users to rec
 
 ## Technical Context
 
-**Language/Version**: TypeScript 5.0+, HTML5, CSS3  
-**Primary Dependencies**: React 18+, Chart.js, date-fns, Tailwind CSS  
-**Storage**: IndexedDB (via Dexie.js) for client-side persistence  
-**Testing**: Jest, React Testing Library, Cypress for E2E  
-**Target Platform**: Progressive Web App (PWA) - works on desktop and mobile browsers  
-**Project Type**: Single web application  
-**Performance Goals**: <200ms UI response time, handle 10,000+ expenses smoothly  
-**Constraints**: Must work offline, responsive design for mobile-first approach  
-**Scale/Scope**: Personal finance tool for individual users, 10,000+ expenses, 50+ categories  
+**Language/Version**: Vanilla JavaScript (ES2022), HTML5, CSS3
+**Build Tool**: Vite 5+ for fast development and optimized builds
+**Primary Dependencies**: Minimal libraries - Chart.js for charts, date-fns for date handling
+**Storage**: Local SQLite database via sql.js for client-side persistence
+**Testing**: Vitest for unit tests, Playwright for E2E testing
+**Target Platform**: Progressive Web App (PWA) - works on desktop and mobile browsers
+**Project Type**: Single web application with vanilla JavaScript
+**Performance Goals**: <200ms UI response time, handle 10,000+ expenses smoothly
+**Constraints**: Must work offline, responsive design for mobile-first approach, minimal dependencies
+**Scale/Scope**: Personal finance tool for individual users, 10,000+ expenses, 50+ categories
 
 ## Constitution Check
 
@@ -50,23 +51,23 @@ specs/001-expense-tracker/
 
 ```text
 src/
-├── components/          # React components
+├── components/          # Vanilla JavaScript components
 │   ├── common/          # Reusable UI components
 │   ├── expense/         # Expense-related components
 │   ├── category/        # Category management components
 │   ├── charts/          # Data visualization components
 │   └── filters/         # Filtering components
 ├── services/            # Business logic and data services
-│   ├── expenseService.ts
-│   ├── categoryService.ts
-│   └── storageService.ts
-├── models/              # Data models and types
-│   ├── Expense.ts
-│   ├── Category.ts
-│   └── Filter.ts
+│   ├── expenseService.js
+│   ├── categoryService.js
+│   └── storageService.js
+├── models/              # Data models and classes
+│   ├── Expense.js
+│   ├── Category.js
+│   └── Filter.js
 ├── utils/               # Utility functions
-├── hooks/               # Custom React hooks
-└── styles/              # CSS and styling
+├── styles/              # CSS modules and styling
+└── database/            # Database schema and migrations
 
 tests/
 ├── unit/                # Unit tests
@@ -75,9 +76,12 @@ tests/
 
 public/                  # Static assets
 └── index.html           # Application entry point
+
+index.js                 # Application entry point
+style.css                # Global styles
 ```
 
-**Structure Decision**: Single web application with component-based architecture using React for optimal reusability and maintainability.
+**Structure Decision**: Single web application with vanilla JavaScript for minimal dependencies and maximum performance, using modular component architecture for maintainability.
 
 ## Complexity Tracking
 

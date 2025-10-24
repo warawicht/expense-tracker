@@ -10,32 +10,32 @@ This document defines the contracts and interfaces for the expense tracker appli
 
 Defines the contract for all data storage operations.
 
-```typescript
-interface IStorageService {
+```javascript
+class StorageService {
   // Initialize the storage system
-  initialize(): Promise<void>;
+  async initialize() {}
   
   // Expense operations
-  getExpenses(filter?: Filter): Promise<Expense[]>;
-  getExpense(id: string): Promise<Expense | null>;
-  saveExpense(expense: Omit<Expense, 'id' | 'createdAt' | 'updatedAt'>): Promise<Expense>;
-  updateExpense(id: string, updates: Partial<Expense>): Promise<Expense>;
-  deleteExpense(id: string): Promise<void>;
+  async getExpenses(filter) {}
+  async getExpense(id) {}
+  async saveExpense(expense) {}
+  async updateExpense(id, updates) {}
+  async deleteExpense(id) {}
   
   // Category operations
-  getCategories(): Promise<Category[]>;
-  getCategory(id: string): Promise<Category | null>;
-  saveCategory(category: Omit<Category, 'id' | 'createdAt' | 'updatedAt'>): Promise<Category>;
-  updateCategory(id: string, updates: Partial<Category>): Promise<Category>;
-  deleteCategory(id: string): Promise<void>;
+  async getCategories() {}
+  async getCategory(id) {}
+  async saveCategory(category) {}
+  async updateCategory(id, updates) {}
+  async deleteCategory(id) {}
   
   // Analytics operations
-  getCategoryTotals(filter?: Filter): Promise<CategoryTotal[]>;
-  getExpenseTrends(filter: Filter, groupBy: 'day' | 'week' | 'month'): Promise<ExpenseTrend[]>;
+  async getCategoryTotals(filter) {}
+  async getExpenseTrends(filter, groupBy) {}
   
   // Utility operations
-  exportData(): Promise<ExportData>;
-  importData(data: ExportData): Promise<ImportResult>;
+  async exportData() {}
+  async importData(data) {}
 }
 ```
 
@@ -43,22 +43,22 @@ interface IStorageService {
 
 Defines the contract for expense business logic.
 
-```typescript
-interface IExpenseService {
+```javascript
+class ExpenseService {
   // CRUD operations
-  createExpense(data: CreateExpenseData): Promise<Expense>;
-  updateExpense(id: string, data: UpdateExpenseData): Promise<Expense>;
-  deleteExpense(id: string): Promise<void>;
-  getExpense(id: string): Promise<Expense | null>;
-  getExpenses(filter?: Filter): Promise<ExpenseListResult>;
+  async createExpense(data) {}
+  async updateExpense(id, data) {}
+  async deleteExpense(id) {}
+  async getExpense(id) {}
+  async getExpenses(filter) {}
   
   // Validation
-  validateExpense(data: CreateExpenseData | UpdateExpenseData): ValidationResult;
+  validateExpense(data) {}
   
   // Analytics
-  getExpenseSummary(filter?: Filter): Promise<ExpenseSummary>;
-  getExpensesByCategory(filter?: Filter): Promise<CategoryExpense[]>;
-  getMonthlyTrends(year: number): Promise<MonthlyTrend[]>;
+  async getExpenseSummary(filter) {}
+  async getExpensesByCategory(filter) {}
+  async getMonthlyTrends(year) {}
 }
 ```
 
@@ -66,21 +66,21 @@ interface IExpenseService {
 
 Defines the contract for category management.
 
-```typescript
-interface ICategoryService {
+```javascript
+class CategoryService {
   // CRUD operations
-  createCategory(data: CreateCategoryData): Promise<Category>;
-  updateCategory(id: string, data: UpdateCategoryData): Promise<Category>;
-  deleteCategory(id: string): Promise<void>;
-  getCategory(id: string): Promise<Category | null>;
-  getCategories(): Promise<Category[]>;
+  async createCategory(data) {}
+  async updateCategory(id, data) {}
+  async deleteCategory(id) {}
+  async getCategory(id) {}
+  async getCategories() {}
   
   // Validation
-  validateCategory(data: CreateCategoryData | UpdateCategoryData): ValidationResult;
+  validateCategory(data) {}
   
   // Utility
-  getCategoryUsage(id: string): Promise<CategoryUsage>;
-  mergeCategories(sourceId: string, targetId: string): Promise<void>;
+  async getCategoryUsage(id) {}
+  async mergeCategories(sourceId, targetId) {}
 }
 ```
 
@@ -88,53 +88,65 @@ interface ICategoryService {
 
 ### Expense DTOs
 
-```typescript
-interface CreateExpenseData {
-  amount: number;
-  date: Date;
-  categoryId: string;
-  paymentMethod: PaymentMethod;
-  description: string;
-  notes?: string;
+```javascript
+class CreateExpenseData {
+  constructor(data) {
+    this.amount = data.amount;
+    this.date = data.date;
+    this.categoryId = data.categoryId;
+    this.paymentMethod = data.paymentMethod;
+    this.description = data.description;
+    this.notes = data.notes || null;
+  }
 }
 
-interface UpdateExpenseData {
-  amount?: number;
-  date?: Date;
-  categoryId?: string;
-  paymentMethod?: PaymentMethod;
-  description?: string;
-  notes?: string;
+class UpdateExpenseData {
+  constructor(data) {
+    this.amount = data.amount;
+    this.date = data.date;
+    this.categoryId = data.categoryId;
+    this.paymentMethod = data.paymentMethod;
+    this.description = data.description;
+    this.notes = data.notes;
+  }
 }
 
-interface ExpenseListResult {
-  expenses: Expense[];
-  totalCount: number;
-  hasMore: boolean;
-  nextCursor?: string;
+class ExpenseListResult {
+  constructor(data) {
+    this.expenses = data.expenses;
+    this.totalCount = data.totalCount;
+    this.hasMore = data.hasMore;
+    this.nextCursor = data.nextCursor || null;
+  }
 }
 ```
 
 ### Category DTOs
 
-```typescript
-interface CreateCategoryData {
-  name: string;
-  color: string;
-  budgetLimit?: number;
+```javascript
+class CreateCategoryData {
+  constructor(data) {
+    this.name = data.name;
+    this.color = data.color;
+    this.budgetLimit = data.budgetLimit || null;
+  }
 }
 
-interface UpdateCategoryData {
-  name?: string;
-  color?: string;
-  budgetLimit?: number;
+class UpdateCategoryData {
+  constructor(data) {
+    this.name = data.name;
+    this.color = data.color;
+    this.budgetLimit = data.budgetLimit;
+  }
 }
 
-interface CategoryUsage {
-  categoryId: string;
-  expenseCount: number;
-  totalAmount: number;
-  lastUsed: Date;
+class CategoryUsage {
+  constructor(data) {
+    this.categoryId = data.categoryId;
+    this.expenseCount = data.expenseCount;
+    this.totalAmount = data.totalAmount;
+    this.lastUsed = data.lastUsed;
+  }
 }
 ```
 

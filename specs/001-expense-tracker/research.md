@@ -8,78 +8,87 @@ This document outlines the research conducted to inform the design and implement
 
 ### Frontend Framework Options
 
+#### Vanilla JavaScript with Vite
+**Advantages:**
+- Minimal bundle size and dependencies
+- Direct control over DOM manipulation
+- Faster load times and better performance
+- Simpler debugging without framework abstraction
+- Better learning curve for developers
+- Vite provides excellent development experience with HMR
+
+**Disadvantages:**
+- More manual DOM manipulation code
+- Need to implement own component system
+- Less ecosystem support for pre-built components
+
+**Decision**: Selected vanilla JavaScript with Vite for minimal dependencies, maximum performance, and direct control over the application.
+
 #### React
 **Advantages:**
 - Large ecosystem and community support
 - Component-based architecture promotes clean code
 - Excellent development tools and debugging
 - Strong TypeScript integration
-- Vast library of UI components and chart libraries
 
 **Disadvantages:**
-- Larger bundle size compared to alternatives
+- Larger bundle size compared to vanilla JS
 - Steeper learning curve for complex state management
-
-**Decision**: Selected React for its mature ecosystem, excellent TypeScript support, and extensive charting libraries that will be needed for data visualization.
+- Framework overhead for simple applications
 
 #### Vue
 **Advantages:**
-- Smaller bundle size
+- Smaller bundle size than React
 - Gentler learning curve
 - Excellent documentation
-- Good TypeScript support
 
 **Disadvantages:**
-- Smaller ecosystem compared to React
-- Fewer specialized charting libraries
-
-#### Svelte
-**Advantages:**
-- Smallest bundle size
-- No virtual DOM overhead
-- Excellent performance
-
-**Disadvantages:**
-- Smaller ecosystem and community
-- Fewer mature charting libraries
+- Still adds framework overhead
+- More complexity than vanilla JS for this use case
 
 ### State Management Options
 
-#### React Context + useReducer
+#### Custom State Management with Vanilla JS
 **Advantages:**
-- Built into React, no additional dependencies
-- Simple for moderate state complexity
-- Good TypeScript support
+- No additional dependencies
+- Complete control over state structure
+- Minimal overhead
+- Simple to understand and debug
+- Can be tailored to specific needs
 
 **Disadvantages:**
-- Can lead to unnecessary re-renders
-- More boilerplate for complex state
+- Need to implement from scratch
+- More manual work for reactivity
+- No built-in dev tools
 
-#### Zustand
+#### Simple Event System
 **Advantages:**
-- Minimal boilerplate
-- Excellent TypeScript support
-- Performance optimized
-- Simple API
+- Lightweight implementation
+- Good for decoupled components
+- Easy to understand
+- Minimal overhead
 
 **Disadvantages:**
-- Additional dependency
-- Less opinionated about state structure
+- Can become complex with many events
+- Need to manage event cleanup
 
-#### Redux Toolkit
-**Advantages:**
-- Excellent dev tools
-- Strong typing with TypeScript
-- Well-established patterns
-
-**Disadvantages:**
-- More boilerplate
-- Steeper learning curve
-- Overkill for this application size
-
-**Decision**: Selected Zustand for its balance of simplicity, performance, and TypeScript support.
+**Decision**: Selected custom state management with vanilla JavaScript using a simple event system for minimal dependencies and maximum control.
 
 ### Data Storage Research
+
+#### SQLite (via sql.js)
+**Advantages:**
+- Full SQL query capabilities
+- Excellent performance with proper indexing
+- Familiar database paradigm
+- Works offline
+- Small library size
+- Good transaction support
+
+**Disadvantages:**
+- Need to load database in memory
+- Initial load time for large databases
+- Browser compatibility considerations
 
 #### IndexedDB (via Dexie.js)
 **Advantages:**
@@ -87,10 +96,10 @@ This document outlines the research conducted to inform the design and implement
 - Large storage capacity (typically several GB)
 - Good performance for queries with indexes
 - Works offline
-- Excellent TypeScript support with Dexie
 
 **Disadvantages:**
-- Complex API (mitigated by Dexie)
+- Complex API
+- Limited query capabilities compared to SQL
 - Browser compatibility variations
 
 #### LocalStorage
@@ -102,33 +111,23 @@ This document outlines the research conducted to inform the design and implement
 - Limited storage capacity (~5MB)
 - Synchronous operations (blocking)
 - No query capabilities
-- Poor performance for large datasets
 
-#### WebSQL
-**Advantages:**
-- SQL query capabilities
-- Good performance
-
-**Disadvantages:**
-- Deprecated technology
-- Limited browser support
-- Not recommended for new applications
-
-**Decision**: Selected IndexedDB with Dexie.js wrapper for its combination of storage capacity, performance, and offline capabilities.
+**Decision**: Selected SQLite with sql.js for its powerful SQL query capabilities, excellent performance, and familiar database paradigm.
 
 ### Charting Libraries Research
 
 #### Chart.js
 **Advantages:**
-- Excellent TypeScript support
-- Good performance
+- Excellent performance
 - Wide variety of chart types
 - Customizable and extensible
 - Responsive design
+- Works well with vanilla JavaScript
+- Reasonable bundle size
 
 **Disadvantages:**
-- Larger bundle size
 - Some advanced features require plugins
+- Less declarative than React-specific libraries
 
 #### D3.js
 **Advantages:**
@@ -141,18 +140,17 @@ This document outlines the research conducted to inform the design and implement
 - More verbose for standard charts
 - Larger bundle size
 
-#### Recharts
+#### Chartist.js
 **Advantages:**
-- React-specific implementation
-- Good TypeScript support
-- Declarative API
-- Composable components
+- Lightweight
+- Good performance
+- Simple API
 
 **Disadvantages:**
-- Fewer chart types than Chart.js
+- Fewer chart types
 - Less customization options
 
-**Decision**: Selected Chart.js for its balance of features, performance, and TypeScript support.
+**Decision**: Selected Chart.js for its balance of features, performance, and good vanilla JavaScript support.
 
 ## User Experience Research
 

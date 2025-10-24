@@ -10,17 +10,23 @@ This document defines the data model and entity relationships for the expense tr
 
 Represents a single financial transaction recorded by the user.
 
-```typescript
-interface Expense {
-  id: string;                    // UUID - Primary identifier
-  amount: number;                // Monetary amount in smallest currency unit
-  date: Date;                    // Transaction date
-  categoryId: string;            // Foreign key to Category
-  paymentMethod: PaymentMethod;  // How the expense was paid
-  description: string;           // Short description of the expense
-  notes?: string;                // Optional additional notes
-  createdAt: Date;               // When the expense was recorded
-  updatedAt: Date;               // Last modification timestamp
+```javascript
+class Expense {
+  constructor(data) {
+    this.id = data.id || this.generateId();
+    this.amount = data.amount;
+    this.date = new Date(data.date);
+    this.categoryId = data.categoryId;
+    this.paymentMethod = data.paymentMethod;
+    this.description = data.description;
+    this.notes = data.notes || null;
+    this.createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
+    this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : new Date();
+  }
+  
+  generateId() {
+    return 'exp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
 }
 ```
 
@@ -34,14 +40,20 @@ interface Expense {
 
 Represents a classification for organizing expenses.
 
-```typescript
-interface Category {
-  id: string;           // UUID - Primary identifier
-  name: string;         // Human-readable category name
-  color: string;        // Hex color code for UI representation
-  budgetLimit?: number; // Optional monthly budget limit
-  createdAt: Date;      // When the category was created
-  updatedAt: Date;      // Last modification timestamp
+```javascript
+class Category {
+  constructor(data) {
+    this.id = data.id || this.generateId();
+    this.name = data.name;
+    this.color = data.color;
+    this.budgetLimit = data.budgetLimit || null;
+    this.createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
+    this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : new Date();
+  }
+  
+  generateId() {
+    return 'cat_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
 }
 ```
 
@@ -54,34 +66,30 @@ interface Category {
 
 Enumeration of supported payment methods.
 
-```typescript
-enum PaymentMethod {
-  CASH = 'cash',
-  CREDIT_CARD = 'credit_card',
-  DEBIT_CARD = 'debit_card',
-  BANK_TRANSFER = 'bank_transfer',
-  DIGITAL_WALLET = 'digital_wallet',
-  OTHER = 'other'
-}
+```javascript
+const PaymentMethod = {
+  CASH: 'cash',
+  CREDIT_CARD: 'credit_card',
+  DEBIT_CARD: 'debit_card',
+  BANK_TRANSFER: 'bank_transfer',
+  DIGITAL_WALLET: 'digital_wallet',
+  OTHER: 'other'
+};
 ```
 
 ### Filter
 
 Represents filtering criteria for expense queries.
 
-```typescript
-interface Filter {
-  dateRange?: {
-    start: Date;
-    end: Date;
-  };
-  categoryIds?: string[];     // Array of category IDs to include
-  amountRange?: {
-    min: number;
-    max: number;
-  };
-  paymentMethods?: PaymentMethod[];
-  searchText?: string;        // Text search in description and notes
+```javascript
+class Filter {
+  constructor(options = {}) {
+    this.dateRange = options.dateRange || null;
+    this.categoryIds = options.categoryIds || [];
+    this.amountRange = options.amountRange || null;
+    this.paymentMethods = options.paymentMethods || [];
+    this.searchText = options.searchText || '';
+  }
 }
 ```
 
@@ -102,37 +110,50 @@ Category (1) ──────── (N) Expense
 
 ## Data Storage Schema
 
-### IndexedDB Structure
+### SQLite Database Structure
 
-```javascript
-// Database: ExpenseTrackerDB (v1)
-const stores = {
-  expenses: {
-    keyPath: 'id',
-    indexes: [
-      { name: 'date', keyPath: 'date' },
-      { name: 'categoryId', keyPath: 'categoryId' },
-      { name: 'amount', keyPath: 'amount' },
-      { name: 'paymentMethod', keyPath: 'paymentMethod' },
-      { name: 'description', keyPath: 'description' },
-      { name: 'date-category', keyPath: ['date', 'categoryId'] },
-      { name: 'date-amount', keyPath: ['date', 'amount'] }
-    ]
-  },
-  categories: {
-    keyPath: 'id',
-    indexes: [
-      { name: 'name', keyPath: 'name', unique: true }
-    ]
-  }
-};
+```sql
+-- Database: expense_tracker.db (v1)
+
+-- Categories table
+CREATE TABLE categories (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  color TEXT NOT NULL,
+  budgetLimit REAL,
+  createdAt DATETIME NOT NULL,
+  updatedAt DATETIME NOT NULL
+);
+
+-- Expenses table
+CREATE TABLE expenses (
+  id TEXT PRIMARY KEY,
+  amount REAL NOT NULL,
+  date DATETIME NOT NULL,
+  categoryId TEXT NOT NULL,
+  paymentMethod TEXT NOT NULL,
+  description TEXT NOT NULL,
+  notes TEXT,
+  createdAt DATETIME NOT NULL,
+  updatedAt DATETIME NOT NULL,
+  FOREIGN KEY (categoryId) REFERENCES categories(id) ON DELETE RESTRICT
+);
+
+-- Indexes for performance
+CREATE INDEX idx_expenses_date ON expenses(date);
+CREATE INDEX idx_expenses_categoryId ON expenses(categoryId);
+CREATE INDEX idx_expenses_amount ON expenses(amount);
+CREATE INDEX idx_expenses_paymentMethod ON expenses(paymentMethod);
+CREATE INDEX idx_expenses_date_category ON expenses(date, categoryId);
+CREATE INDEX idx_expenses_date_amount ON expenses(date, amount);
+CREATE INDEX idx_categories_name ON categories(name);
 ```
 
 ## Data Validation Rules
 
 ### Expense Validation
 
-```typescript
+```javascript
 const expenseValidation = {
   amount: {
     required: true,
@@ -171,7 +192,7 @@ const expenseValidation = {
 
 ### Category Validation
 
-```typescript
+```javascript
 const categoryValidation = {
   name: {
     required: true,
@@ -199,31 +220,40 @@ const categoryValidation = {
 
 1. **Get expenses by date range**
    ```sql
-   SELECT * FROM expenses 
-   WHERE date >= ? AND date <= ? 
+   SELECT * FROM expenses
+   WHERE date >= ? AND date <= ?
    ORDER BY date DESC
    ```
 
 2. **Get expenses by category**
    ```sql
-   SELECT * FROM expenses 
-   WHERE categoryId = ? 
+   SELECT * FROM expenses
+   WHERE categoryId = ?
    ORDER BY date DESC
    ```
 
 3. **Get category totals for date range**
    ```sql
-   SELECT categoryId, SUM(amount) as total
-   FROM expenses 
-   WHERE date >= ? AND date <= ? 
-   GROUP BY categoryId
+   SELECT e.categoryId, c.name as categoryName, c.color, SUM(e.amount) as total, COUNT(e.id) as count
+   FROM expenses e
+   JOIN categories c ON e.categoryId = c.id
+   WHERE e.date >= ? AND e.date <= ?
+   GROUP BY e.categoryId, c.name, c.color
    ```
 
 4. **Search expenses by text**
    ```sql
-   SELECT * FROM expenses 
+   SELECT * FROM expenses
    WHERE description LIKE ? OR notes LIKE ?
    ORDER BY date DESC
+   ```
+
+5. **Get expenses with category details**
+   ```sql
+   SELECT e.*, c.name as categoryName, c.color as categoryColor
+   FROM expenses e
+   JOIN categories c ON e.categoryId = c.id
+   ORDER BY e.date DESC
    ```
 
 ## Performance Considerations
@@ -239,11 +269,13 @@ const categoryValidation = {
 
 For large datasets, implement cursor-based pagination:
 
-```typescript
-interface PaginationParams {
-  limit: number;
-  cursor?: string; // Expense ID to start after
-  direction: 'forward' | 'backward';
+```javascript
+class PaginationParams {
+  constructor(options = {}) {
+    this.limit = options.limit || 50;
+    this.cursor = options.cursor || null;
+    this.direction = options.direction || 'forward';
+  }
 }
 ```
 
@@ -252,6 +284,7 @@ interface PaginationParams {
 - Cache frequently accessed categories in memory
 - Implement LRU cache for filtered expense queries
 - Cache chart data calculations for common date ranges
+- Use prepared statements for repeated queries
 
 ## Data Migration
 
@@ -259,22 +292,30 @@ interface PaginationParams {
 
 Database versioning will handle schema migrations:
 
-```typescript
+```javascript
 const migrations = {
   1: {
     up: (db) => {
       // Create initial schema
+      db.exec(`
+        CREATE TABLE categories (...);
+        CREATE TABLE expenses (...);
+        CREATE INDEX ...;
+      `);
     },
     down: (db) => {
       // Revert to previous version
+      db.exec(`DROP TABLE IF EXISTS expenses; DROP TABLE IF EXISTS categories;`);
     }
   },
   2: {
     up: (db) => {
       // Add new indexes or fields
+      db.exec(`ALTER TABLE expenses ADD COLUMN tags TEXT;`);
     },
     down: (db) => {
       // Remove version 2 changes
+      db.exec(`ALTER TABLE expenses DROP COLUMN tags;`);
     }
   }
 };
