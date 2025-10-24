@@ -18,6 +18,9 @@
   - Tested independently
   - Deployed independently
   - Demonstrated to users independently
+  
+  Constitution Alignment: Each user story MUST address the User Experience First principle
+  with clear focus on user needs, intuitive workflows, and accessibility.
 -->
 
 ### User Story 1 - [Brief Title] (Priority: P1)
@@ -85,10 +88,12 @@
 ### Functional Requirements
 
 - **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
+- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]
 - **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
+- **FR-006**: System MUST provide [accessibility feature, e.g., "keyboard navigation for all interactive elements"]
+- **FR-007**: System MUST respond to user actions within [performance requirement, e.g., "200ms for UI interactions"]
 
 *Example of marking unclear requirements:*
 
@@ -113,3 +118,5 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-005**: [Code quality metric, e.g., "Maintain 80%+ test coverage and <10 complexity per function"]
+- **SC-006**: [Observability metric, e.g., "All critical user journeys have monitoring and alerting"]

@@ -31,7 +31,11 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Clean Code Foundation: Is the solution designed with clarity, maintainability, and simplicity?
+- Test-Driven Development: Are tests planned before implementation with adequate coverage?
+- User Experience First: Does the design prioritize user needs and intuitive workflows?
+- Continuous Integration: Can the solution be tested and deployed automatically?
+- Observability: Are logging, monitoring, and performance metrics planned?
 
 ## Project Structure
 

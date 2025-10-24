@@ -50,7 +50,10 @@ description: "Task list template for feature implementation"
 
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T003 [P] Configure linting and formatting tools (Clean Code Foundation)
+- [ ] T004 [P] Setup automated testing framework (Test-Driven Development)
+- [ ] T005 [P] Configure CI/CD pipeline (Continuous Integration & Delivery)
+- [ ] T006 [P] Setup logging and monitoring infrastructure (Observability)
 
 ---
 
@@ -62,12 +65,14 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T007 Setup database schema and migrations framework
+- [ ] T008 [P] Implement authentication/authorization framework
+- [ ] T009 [P] Setup API routing and middleware structure
+- [ ] T010 Create base models/entities that all stories depend on
+- [ ] T011 Configure error handling and logging infrastructure (Observability)
+- [ ] T012 Setup environment configuration management
+- [ ] T013 [P] Implement accessibility testing tools (User Experience First)
+- [ ] T014 [P] Setup performance monitoring dashboards (Observability)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -79,21 +84,24 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 1 (REQUIRED - Test-Driven Development) ⚠️
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T015 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
+- [ ] T016 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T017 [P] [US1] Unit tests for core business logic in tests/unit/test_[name].py
+- [ ] T018 [P] [US1] Accessibility test for user interface in tests/accessibility/test_[name].py
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+- [ ] T019 [P] [US1] Create [Entity1] model in src/models/[entity1].py (Clean Code Foundation)
+- [ ] T020 [P] [US1] Create [Entity2] model in src/models/[entity2].py (Clean Code Foundation)
+- [ ] T021 [US1] Implement [Service] in src/services/[service].py (depends on T019, T020)
+- [ ] T022 [US1] Implement [endpoint/feature] in src/[location]/[file].py (User Experience First)
+- [ ] T023 [US1] Add validation and error handling (Clean Code Foundation)
+- [ ] T024 [US1] Add structured logging for user story 1 operations (Observability)
+- [ ] T025 [US1] Add performance monitoring for critical user paths (Observability)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -150,12 +158,14 @@ Examples of foundational tasks (adjust based on your project):
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] TXXX [P] Documentation updates in docs/
-- [ ] TXXX Code cleanup and refactoring
-- [ ] TXXX Performance optimization across all stories
-- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
-- [ ] TXXX Security hardening
-- [ ] TXXX Run quickstart.md validation
+- [ ] T030 [P] Documentation updates in docs/
+- [ ] T031 Code cleanup and refactoring (Clean Code Foundation)
+- [ ] T032 Performance optimization across all stories (User Experience First)
+- [ ] T033 [P] Additional unit tests to improve coverage (Test-Driven Development)
+- [ ] T034 Security hardening and audit
+- [ ] T035 [P] Accessibility audit and improvements (User Experience First)
+- [ ] T036 Run quickstart.md validation
+- [ ] T037 [P] Verify all monitoring and alerting is functional (Observability)
 
 ---
 

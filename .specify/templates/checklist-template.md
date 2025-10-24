@@ -20,17 +20,45 @@
   ============================================================================
 -->
 
-## [Category 1]
+## Clean Code Foundation
 
-- [ ] CHK001 First checklist item with clear action
-- [ ] CHK002 Second checklist item
-- [ ] CHK003 Third checklist item
+- [ ] CHK001 Code follows established style guidelines
+- [ ] CHK002 Functions and classes have single, clear responsibilities
+- [ ] CHK003 Code complexity is within acceptable thresholds
+- [ ] CHK004 Meaningful names used for all variables, functions, and classes
+- [ ] CHK005 No duplicate code (DRY principle followed)
 
-## [Category 2]
+## Test-Driven Development
 
-- [ ] CHK004 Another category item
-- [ ] CHK005 Item with specific criteria
-- [ ] CHK006 Final item in this category
+- [ ] CHK006 Tests written before implementation code
+- [ ] CHK007 All critical paths covered by automated tests
+- [ ] CHK008 Test code quality meets production standards
+- [ ] CHK009 Minimum 80% code coverage maintained
+- [ ] CHK010 Edge cases and error conditions tested
+
+## User Experience First
+
+- [ ] CHK011 Interface is intuitive and easy to navigate
+- [ ] CHK012 User feedback incorporated into design
+- [ ] CHK013 Accessibility standards (WCAG 2.1 AA) met
+- [ ] CHK014 Response times meet performance expectations
+- [ ] CHK015 Error messages are clear and helpful
+
+## Continuous Integration & Delivery
+
+- [ ] CHK016 All changes automatically tested before merging
+- [ ] CHK017 Deployment process is automated and repeatable
+- [ ] CHK018 Feature flags implemented for controlled releases
+- [ ] CHK019 Zero-downtime deployment capability verified
+- [ ] CHK020 Rollback procedures tested and documented
+
+## Observability & Monitoring
+
+- [ ] CHK021 Structured logging implemented throughout system
+- [ ] CHK022 Critical user journeys monitored with alerts
+- [ ] CHK023 Performance metrics tracked and visualized
+- [ ] CHK024 Security events logged and monitored
+- [ ] CHK025 System health dashboards operational
 
 ## Notes
 
